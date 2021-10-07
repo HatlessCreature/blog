@@ -1,17 +1,13 @@
-<html>
+@extends('layouts.app')
 
-<head>
-    <title>{{$post->title}}</title>
-</head>
+@section('title', $post->title)
 
-<body>
-    <a href="/posts">Go to posts</a>
-    <h2>
-        {{$post->title}}
-    </h2>
-    <p>
-        {{$post->body}}
-    </p>
-</body>
-
-</html>
+@section('content')
+<a href="/posts">Go to posts</a>
+<h2>
+    {{$post->title}}
+</h2>
+<p>
+    {{$post->body}}
+</p>
+@endsection
