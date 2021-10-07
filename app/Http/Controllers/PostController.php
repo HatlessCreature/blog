@@ -12,7 +12,7 @@ class PostController extends Controller
     {
         $posts = Post::unpublished()->get();
 
-        return view('posts', compact('posts'));
+        return view('posts.index', compact('posts'));
     }
 
     public function show(Post $post)
@@ -20,6 +20,6 @@ class PostController extends Controller
         if ($post->is_published) {
             throw new ModelNotFoundException;
         }
-        return view('post', compact('post'));
+        return view('posts.show', compact('post'));
     }
 }
