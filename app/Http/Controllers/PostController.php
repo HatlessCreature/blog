@@ -17,13 +17,13 @@ class PostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
-    public function show($post)
+    public function show(Post $post)
     {
-        // if ($post->is_published) {
-        //     throw new ModelNotFoundException;
-        // }
-
-        $post = Post::with('comments')->findOrFail($post);
+        if ($post->is_published) {
+            throw new ModelNotFoundException;
+        }
+        // info($post);
+        // $post = Post::with('comments')->findOrFail($post);
 
         // $comments = Comment::where('post_id', $post->id)->get();
 
