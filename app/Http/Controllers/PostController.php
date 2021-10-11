@@ -26,7 +26,7 @@ class PostController extends Controller
         // $post = Post::with('comments')->findOrFail($post);
 
         // $comments = Comment::where('post_id', $post->id)->get();
-
+        $post->load(['comments']);
         return view('posts.show', compact('post'));
     }
 
