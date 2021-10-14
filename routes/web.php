@@ -29,3 +29,7 @@ Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name
 Route::get('/register', [AuthController::class, 'getRegisterForm']);
 Route::post('/register', [AuthController::class, 'register']);
 //po konvenciji bi bila store metoda ^
+Route::post('/logout', [AuthController::class, 'logout']);
+//po konvenciji bi bila delete metoda ^ (mada nema neke jake konvencije)
+Route::get('/login', [AuthController::class, 'getLoginBlade']);
+Route::post('/login', [AuthController::class, 'login']);
