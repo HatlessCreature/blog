@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,3 +26,6 @@ Route::get('/posts/create', [PostController::class, 'create']);
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('post');
 Route::post('/posts', [PostController::class, 'store']);
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('createComment');
+Route::get('/register', [AuthController::class, 'getRegisterForm']);
+Route::post('/register', [AuthController::class, 'register']);
+//po konvenciji bi bila store metoda ^
