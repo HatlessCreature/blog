@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Post;
+use App\User;
+
 // use App\Comment;
 use App\Http\Requests\CreatePostRequest;
 
@@ -49,7 +52,18 @@ class PostController extends Controller
 
         //noviji nacin
         $data = $request->validated();
-        $newPost = Post::create($data);
+        // $newPost = Post::create($data);
+
+        // $newPost = Auth::user()->posts()->create($data);
+        // laravelov bolji i skraceni zapis, radi ali se crveni ^
+
+        $newPost = Post::create([
+            'title' => $request->get('title'),
+            'body' => $request->get('body'),
+            'is_published' => $request->get('is_published'),
+            'user_id' => Auth::user()->id
+        ]);
+        //ovo ^ je isto kao ^^
 
         return redirect('/posts');
     }

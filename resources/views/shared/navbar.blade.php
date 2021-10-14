@@ -3,10 +3,10 @@
         <a class="navbar-brand" href="/posts">
             Vivify Blog
         </a>
+        @auth
         <a href="/posts/create" class="navbar-brand">
             Create Post
         </a>
-        @auth
         <div>
             {{ auth()->user()->name }}
         </div>
