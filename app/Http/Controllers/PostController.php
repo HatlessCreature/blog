@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -15,14 +16,17 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::unpublished()->get();
+        // DB::listen(function ($query) {
+        //         info($query->sql);
+        //     });
+        $posts = Post::published()->get();
 
         return view('posts.index', compact('posts'));
     }
 
     public function show(Post $post)
     {
-        if ($post->is_published) {
+        if (!$post->is_published) {
             throw new ModelNotFoundException;
         }
         // info($post);
@@ -60,11 +64,20 @@ class PostController extends Controller
         $newPost = Post::create([
             'title' => $request->get('title'),
             'body' => $request->get('body'),
-            'is_published' => $request->get('is_published'),
+            'is_published' => $request->get('is_published', false),
             'user_id' => Auth::user()->id
         ]);
         //ovo ^ je isto kao ^^
 
         return redirect('/posts');
+    }
+
+    public function getAuthorsPosts(User $author)
+    {
+        // $posts = $author->posts->where('is_published', true);
+        // ovaj nacin bi dao sve iz baze, pa nam onda u ram-u odvojio published ^
+
+        $posts = $author->posts()->where('is_published', true)->get();
+        return view('posts.index', compact('posts'));
     }
 }

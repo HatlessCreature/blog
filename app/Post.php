@@ -10,7 +10,12 @@ class Post extends Model
     // protected $with = ['comments'];
     public static function unpublished()
     {
-        return self::with('comments')->where('is_published', false);
+        return self::with('comments', 'user')->where('is_published', false);
+    }
+
+    public static function published()
+    {
+        return self::with('comments', 'user')->where('is_published', true);
     }
 
     public function comments()

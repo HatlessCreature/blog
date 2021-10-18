@@ -28,6 +28,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/posts', [PostController::class, 'store']);
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('createComment');
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/authors/{author}', [PostController::class, 'getAuthorsPosts'])->name('author');
+
     //po konvenciji bi bila delete metoda ^ (mada nema neke jake konvencije)
 });
 
