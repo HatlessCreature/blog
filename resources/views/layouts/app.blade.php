@@ -9,6 +9,9 @@
 
 <body>
     @include('shared.navbar')
+    <p>
+        Number of server requests: {{ session('number_of_requests', 1)}}
+    </p>
     <div class='container'>
         @yield('content')
     </div>
