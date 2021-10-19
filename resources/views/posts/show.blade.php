@@ -12,7 +12,11 @@
 
 <h5>Comments</h5>
 @forelse($post->comments as $comment)
-{{ $comment->body }}
+<div>
+    <div>{{ $comment->user->name }}</div>
+    <blockquote>{{ $comment->body }}</blockquote>
+    <small>{{ $comment->created_at }}</small>
+</div>
 @empty
 <span>No comments</span>
 @endforelse

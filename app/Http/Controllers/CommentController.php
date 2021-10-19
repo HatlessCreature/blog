@@ -41,9 +41,10 @@ class CommentController extends Controller
     public function store(Post $post, CommentRequest $request)
     {
         $data = $request->validated();
+        $data['user_id'] = Auth::id();
         $comment = $post->comments()->create($data);
 
-        Mail::to($post->user)->send(new CommentReceived(Auth::user(), $comment));
+        Mail::to($post->user)->send(new CommentReceived($comment));
 
         return back();
     }
