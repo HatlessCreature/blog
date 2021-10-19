@@ -26,7 +26,9 @@ class CreatePostRequest extends FormRequest
         return [
             'title' => 'required|string|max:255|unique:posts',
             'body' => 'required|string|max:1000',
-            'is_published' => 'sometimes'
+            'is_published' => 'sometimes',
+            'tags' => 'required|array|min:1',
+            'tags.*' => 'integer|exists:tags.id'
         ];
     }
     //nase custom poruke

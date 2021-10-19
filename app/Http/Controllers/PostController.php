@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Post;
 use App\User;
+use App\Tag;
+
 
 // use App\Comment;
 use App\Http\Requests\CreatePostRequest;
@@ -42,7 +44,8 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('posts.create');
+        $tags = Tag::all();
+        return view('posts.create', compact('tags'));
     }
 
     public function store(CreatePostRequest $request)
@@ -54,7 +57,6 @@ class PostController extends Controller
         // $post->is_published = $request->get('is_published', false);
 
         // $post->save();
-
 
 
         //noviji nacin
@@ -70,9 +72,10 @@ class PostController extends Controller
             'is_published' => $request->get('is_published', false),
             'user_id' => Auth::user()->id
         ]);
+        $newPost->tags()->attach($data['tags']); //moze sync umesto attach
         //ovo ^ je isto kao ^^
 
-        return redirect('/posts');
+        return redirect(route('post', ['post' => $newPost]));
     }
 
     public function getAuthorsPosts(User $author)

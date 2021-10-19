@@ -6,6 +6,19 @@
 <h2>
     {{$post->title}}
 </h2>
+<h3>
+    {{ $post->user->name }}
+</h3>
+<div>
+    @foreach($post->tags as $tag)
+    <span style="
+        padding: 5px; 
+        border-radius: 15px;
+        background-color:{{$tag->hex_color}}">
+        {{ $tag->name }}
+    </span>
+    @endforeach
+</div>
 <p>
     {{$post->body}}
 </p>
