@@ -19,7 +19,7 @@ class PostController extends Controller
         // DB::listen(function ($query) {
         //         info($query->sql);
         //     });
-        $posts = Post::published()->get();
+        $posts = Post::published()->paginate(5);
 
         return view('posts.index', compact('posts'));
     }
