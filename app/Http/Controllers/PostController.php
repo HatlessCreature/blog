@@ -19,7 +19,7 @@ class PostController extends Controller
         // DB::listen(function ($query) {
         //         info($query->sql);
         //     });
-        $posts = Post::published()->paginate(5);
+        $posts = Post::published()->paginate(15);
 
         return view('posts.index', compact('posts'));
     }
@@ -77,7 +77,7 @@ class PostController extends Controller
         // $posts = $author->posts->where('is_published', true);
         // ovaj nacin bi dao sve iz baze, pa nam onda u ram-u odvojio published ^
 
-        $posts = $author->posts()->where('is_published', true)->get();
+        $posts = $author->posts()->where('is_published', true)->paginate(15);
         return view('posts.index', compact('posts'));
     }
 }
