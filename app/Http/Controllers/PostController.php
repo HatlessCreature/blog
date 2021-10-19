@@ -36,6 +36,7 @@ class PostController extends Controller
         $post->load(['comments.user' => function ($qb) {
             return $qb->select(['users.id', 'users.name']);
         }]);
+        //stedimo memoriju kad u query stavimo samo ono sta hocemo
         return view('posts.show', compact('post'));
     }
 
