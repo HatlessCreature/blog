@@ -72,8 +72,8 @@ class PostController extends Controller
             'is_published' => $request->get('is_published', false),
             'user_id' => Auth::user()->id
         ]);
-        $newPost->tags()->attach($data['tags']); //moze sync umesto attach
         //ovo ^ je isto kao ^^
+        $newPost->tags()->attach($data['tags']); //moze sync umesto attach
 
         return redirect(route('post', ['post' => $newPost]));
     }
