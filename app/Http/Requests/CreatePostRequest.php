@@ -28,7 +28,7 @@ class CreatePostRequest extends FormRequest
             'body' => 'required|string|max:1000',
             'is_published' => 'sometimes',
             'tags' => 'required|array|min:1',
-            'tags.*' => 'integer|exists:tags.id'
+            'tags.*' => 'integer|exists:tags,id'
         ];
     }
     //nase custom poruke
